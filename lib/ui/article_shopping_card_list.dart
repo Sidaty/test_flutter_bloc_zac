@@ -18,7 +18,7 @@ class ArticleShoppingCardList extends StatelessWidget {
     final articles = state.articles.values.toList();
     return ListView.separated(
       itemCount: articles.length,
-      padding: const EdgeInsets.only(bottom: 40.0),
+      padding: const EdgeInsets.only(bottom: 80.0),
       itemBuilder: (context, index) {
         return buildListTile(context, articles[index]);
       },
@@ -64,7 +64,10 @@ class ArticleShoppingCardList extends StatelessWidget {
               },
             ),
           if (article.selected)
-            Text('${article.quantity}', style: TextStyle(fontSize: 15.0)),
+            Text(
+              '${article.quantity}',
+              style: TextStyle(fontSize: 15.0),
+            ),
           if (article.selected)
             IconButton(
               icon: Icon(
@@ -83,7 +86,7 @@ class ArticleShoppingCardList extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               backgroundColor: accentColor,
-            )
+            ),
         ],
       ),
       onTap: () {
