@@ -88,37 +88,47 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
     final article = state.articles[event.id];
     if (article.selected) return state;
 
-    article.selected = true;
-    article.quantity = 1;
+    final articles = {
+      ...state.articles,
+      article.article.id: article.copyWith(selected: true, quantity: 1),
+    };
 
-    return ArticleLoadedState(articles: {...state.articles});
+    return ArticleLoadedState(articles: articles);
   }
 
   ArticleLoadedState _removeArticle(RemoveArticleEvent event) {
     final article = state.articles[event.id];
     if (!article.selected) return state;
 
-    article.selected = false;
-    article.quantity = 0;
+    final articles = {
+      ...state.articles,
+      article.article.id: article.copyWith(selected: false, quantity: 0),
+    };
 
-    return ArticleLoadedState(articles: {...state.articles});
+    return ArticleLoadedState(articles: articles);
   }
 
   ArticleLoadedState _incrementArticle(IncrementArticleEvent event) {
     final article = state.articles[event.id];
     if (!article.selected) return state;
 
-    article.increment();
+    final articles = {
+      ...state.articles,
+      article.article.id: article.copyWith(quantity: article.quantity + 1)
+    };
 
-    return ArticleLoadedState(articles: {...state.articles});
+    return ArticleLoadedState(articles: articles);
   }
 
   ArticleLoadedState _decrementArticle(DecrementArticleEvent event) {
     final article = state.articles[event.id];
     if (!article.selected) return state;
 
-    article.decrement();
+    final articles = {
+      ...state.articles,
+      article.article.id: article.copyWith(quantity: article.quantity - 1)
+    };
 
-    return ArticleLoadedState(articles: {...state.articles});
+    return ArticleLoadedState(articles: articles);
   }
 }

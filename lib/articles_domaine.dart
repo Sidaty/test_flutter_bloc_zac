@@ -1,20 +1,25 @@
 class ArticleModel {
   final Article article;
-  int quantity;
-  bool selected;
+  final int quantity;
+  final bool selected;
 
   ArticleModel(this.article, {this.selected = false, this.quantity = 0})
       : assert(article != null);
 
   int get amount => article.amount * quantity;
 
-  increment() => quantity++;
-  decrement() => quantity--;
+  ArticleModel copyWith({int quantity, bool selected}) {
+    return ArticleModel(
+      article,
+      quantity: quantity ?? this.quantity,
+      selected: selected ?? this.selected,
+    );
+  }
 
   @override
   bool operator ==(other) {
-    if (other is ArticleModel) return article == other.article;
-    return false;
+    if (identical(this, other)) return true;
+    return (other is ArticleModel) && article == other.article;
   }
 
   @override
@@ -30,8 +35,8 @@ class Article {
 
   @override
   bool operator ==(other) {
-    if (other is Article) return id == other.id;
-    return false;
+    if (identical(this, other)) return true;
+    return other is Article && id == other.id;
   }
 
   @override
