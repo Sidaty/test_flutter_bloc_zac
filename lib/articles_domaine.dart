@@ -3,10 +3,13 @@ class ArticleModel {
   final int quantity;
   final bool selected;
 
-  ArticleModel(this.article, {this.selected = false, this.quantity = 0})
-      : assert(article != null);
+  ArticleModel(
+    this.article, {
+    this.selected = false,
+    this.quantity = 0,
+  }) : assert(article != null);
 
-  int get amount => article.amount * quantity;
+  int get amount => selected ? article.amount * quantity : 0;
 
   ArticleModel copyWith({int quantity, bool selected}) {
     return ArticleModel(

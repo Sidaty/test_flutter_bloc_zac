@@ -32,6 +32,8 @@ class DecrementArticleEvent extends ArticleEvent {
 abstract class ArticleState {
   final Map<int, ArticleModel> articles;
 
+  List<ArticleModel> get selectedArticles => articles.values.where((a) => a.selected).toList();
+
   ArticleState({this.articles = const {}});
 }
 

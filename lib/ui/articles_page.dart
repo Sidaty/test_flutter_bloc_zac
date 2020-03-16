@@ -8,12 +8,22 @@ class ArticlesPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Catalogue'),
         actions: <Widget>[
-          ArticleShoppingCardCount(),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ArticlesShoppingCardPage(),
+                ),
+              );
+            },
+            child: ArticleShoppingCardCount(),
+          ),
         ],
       ),
       body: Stack(
         children: <Widget>[
-          ArticleShoppingCardList(),
+          ArticleCatalogueList(),
           Positioned(
             right: 20.0,
             bottom: 30.0,
