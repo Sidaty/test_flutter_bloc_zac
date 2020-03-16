@@ -7,19 +7,22 @@ class ArticleShoppingCardAmount extends StatelessWidget {
     return BlocBuilder<ArticleBloc, ArticleState>(
         builder: (context, state) {
           if (state is ArticleLoadedState) {
-            return Material(
-              elevation: 5.0,
-              color: Theme.of(context).primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: SizedBox(
-                height: 50.0,
-                width: 150.0,
-                child: Center(
-                  child: Text(
-                    '${state.totalAmount} FCFA',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+            return Hero(
+              tag: 'amount',
+              child: Material(
+                elevation: 5.0,
+                color: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: SizedBox(
+                  height: 50.0,
+                  width: 150.0,
+                  child: Center(
+                    child: Text(
+                      '${state.totalAmount} FCFA',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
                   ),
                 ),
               ),
