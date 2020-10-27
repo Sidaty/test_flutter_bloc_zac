@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testflutterbloczac/articles_domaine.dart';
+import 'package:testflutterbloczac/@app.dart';
 
 abstract class ArticleEvent {}
 
@@ -57,8 +57,8 @@ class ArticleLoadedState extends ArticleState {
 }
 
 class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
-  @override
-  ArticleState get initialState => ArticleInitialState();
+
+  ArticleBloc(): super(ArticleInitialState());
 
   loadArticles() => add(LoadArticleEvent());
   addArticle(int id) => add(AddArticleEvent(id));
@@ -69,12 +69,7 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
   @override
   Stream<ArticleState> mapEventToState(ArticleEvent event) async* {
     if (event is LoadArticleEvent) {
-      yield ArticleLoadingState();
-      await Future.delayed(Duration(seconds: 3));
-      final articleModels = articles
-          .asMap()
-          .map((id, article) => MapEntry(article.id, ArticleModel(article)));
-      yield ArticleLoadedState(articles: articleModels);
+      yield* _loadArticle();
     } else if (event is AddArticleEvent) {
       yield _addArticle(event);
     } else if (event is RemoveArticleEvent) {
@@ -84,6 +79,15 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
     } else if (event is DecrementArticleEvent) {
       yield _decrementArticle(event);
     }
+  }
+
+  Stream<ArticleState> _loadArticle() async* {
+    yield ArticleLoadingState();
+    await Future.delayed(Duration(seconds: 3));
+    final articleModels = articles
+        .asMap()
+        .map((_, article) => MapEntry(article.id, ArticleModel(article)));
+    yield ArticleLoadedState(articles: articleModels);
   }
 
   ArticleLoadedState _addArticle(AddArticleEvent event) {

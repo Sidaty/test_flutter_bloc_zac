@@ -6,7 +6,7 @@ void main() {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => ArticleBloc()..loadArticles()),
+        BlocProvider(create: (context) => TestBloc()),
       ],
       child: MyApp(),
     ),
@@ -22,7 +22,33 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ArticlesPage(),
+      home: TestBlocUI(),
     );
   }
 }
+//
+//void main() {
+//  runApp(
+//    MultiBlocProvider(
+//      providers: [
+//        BlocProvider(create: (_) => ArticleBloc()..loadArticles()),
+//      ],
+//      child: MyApp(),
+//    ),
+//  );
+//}
+//
+//class MyApp extends StatelessWidget {
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return MaterialApp(
+//      debugShowCheckedModeBanner: false,
+//      title: 'Flutter Demo',
+//      theme: ThemeData(
+//        primarySwatch: Colors.blue,
+//      ),
+//      home: ArticlesPage(),
+//    );
+//  }
+//}

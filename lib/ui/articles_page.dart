@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testflutterbloczac/@app.dart';
 
 class ArticlesPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
