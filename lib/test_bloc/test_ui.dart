@@ -71,7 +71,7 @@ class NombreAdd extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       child: Icon(Icons.add),
-      onPressed: () => BlocProvider.of<TestBloc>(context).increment(),
+      onPressed: () => context.bloc<TestBloc>().increment(),
     );
   }
 }
@@ -84,7 +84,7 @@ class NombreRemove extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       child: Icon(Icons.remove),
-      onPressed: () => BlocProvider.of<TestBloc>(context).decrement(),
+      onPressed: () => context.bloc<TestBloc>().decrement(),
     );
   }
 }
